@@ -76,3 +76,17 @@ class CompoundPlan(Page):
 
     def __str__(self):
         return self.goal_name
+    
+class ToDoItem(Page):
+    task_name = models.CharField(max_length=255)
+    due_date = models.DateField(null=True, blank=True)
+    is_complete = models.BooleanField(default=False)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('task_name'),
+        FieldPanel('due_date'),
+        FieldPanel('is_complete'),
+    ]
+
+    def __str__(self):
+        return self.task_name

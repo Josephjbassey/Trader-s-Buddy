@@ -55,3 +55,24 @@ class TradeEntry(Page):
 
     def __str__(self):
         return f"{self.pair} - {self.entry_time_date}"
+
+
+class CompoundPlan(Page):
+    goal_name = models.CharField(max_length=255)
+    initial_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    target_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    target_date = models.DateField()
+    current_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    notes = models.TextField(null=True, blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('goal_name'),
+        FieldPanel('initial_balance'),
+        FieldPanel('target_balance'),
+        FieldPanel('target_date'),
+        FieldPanel('current_balance'),
+        FieldPanel('notes'),
+    ]
+
+    def __str__(self):
+        return self.goal_name
